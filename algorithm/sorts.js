@@ -82,6 +82,37 @@ function quickSort(arr) {
   return quickSort(left).concat(pivot, quickSort(right));
 }
 
+// 힙 정렬
+function heapify(arr, n, i) {
+  let largest = i;
+  const left = 2 * i + 1;
+  const right = 2 * i + 2;
+
+  if (left < n && arr[left] > arr[largest]) {
+    largest = left;
+  }
+  if (right < n && arr[right] > arr[largest]) {
+    largest = right;
+  }
+  if (largest !== i) {
+    [arr[i], arr[largest]] = [arr[largest], arr[i]];
+    heapify(arr, n, largest);
+  }
+}
+
+function heapsort(arr) {
+  const n = arr.length;
+  for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
+    heapify(arr, n, i);
+  }
+  for (let i = n - 1; i > 0; i--) {
+    [arr[0], arr[i]] = [arr[i], arr[0]];
+    heapify(arr, i, 0);
+  }
+  return arr;
+}
+
+// 정렬 알고리즘 테스트
 const arr = [11, 2, 9, 1, 5, 6];
 console.log("선택 정렬 전", arr);
 console.log("선택 정렬", selectionSort([...arr]));
@@ -91,3 +122,5 @@ console.log("병합 정렬 전", arr);
 console.log("병합 정렬", mergeSort([...arr]));
 console.log("퀵 정렬 전", arr);
 console.log("퀵 정렬", quickSort([...arr]));
+console.log("힙 정렬 전", arr);
+console.log("힙 정렬", heapsort([...arr]));
