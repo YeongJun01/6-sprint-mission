@@ -78,8 +78,9 @@ function quickSort(arr) {
   }
   const pivot = arr[Math.floor(arr.length / 2)];
   const left = arr.filter((x) => x < pivot);
+  const middle = arr.filter((x) => x === pivot);
   const right = arr.filter((x) => x > pivot);
-  return quickSort(left).concat(pivot, quickSort(right));
+  return quickSort(left).concat(middle, quickSort(right));
 }
 
 // 힙 정렬
@@ -113,7 +114,7 @@ function heapsort(arr) {
 }
 
 // 정렬 알고리즘 테스트
-const arr = [11, 2, 9, 1, 5, 6];
+const arr = [11, 2, 9, 1, 5, 6, 9];
 console.log("선택 정렬 전", arr);
 console.log("선택 정렬", selectionSort([...arr]));
 console.log("삽입 정렬 전", arr);
